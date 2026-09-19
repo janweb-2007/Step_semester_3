@@ -1,0 +1,46 @@
+package encapsulation.assignments_problems;
+
+public class Character {
+
+    private final int maxHealth;
+    private int health;
+
+    public Character(int maxHealth) {
+        this.maxHealth = maxHealth;
+        this.health = maxHealth;
+    }
+
+    public void takeDamage(int amount) {
+        int newHealth = health - amount;
+        if (newHealth < 0) {
+            newHealth = 0;
+        }
+        health = newHealth;
+    }
+
+    public void heal(int amount) {
+        int newHealth = health + amount;
+        if (newHealth > maxHealth) {
+            newHealth = maxHealth;
+        }
+        health = newHealth;
+    }
+
+    public int getHealth() {
+        return health;
+    }
+
+    public static void main(String[] args) {
+        Character c = new Character(100);
+        System.out.println("Initial health: " + c.getHealth());
+
+        c.takeDamage(30);
+        System.out.println("After takeDamage(30): " + c.getHealth()); // 70
+
+        c.heal(50);
+        System.out.println("After heal(50): " + c.getHealth()); // 100 (capped)
+
+        c.takeDamage(150);
+        System.out.println("After takeDamage(150): " + c.getHealth()); // 0 (floored)
+    }
+}
